@@ -30,7 +30,7 @@ The deck's proposed LLM verification, three-signal scoring (recency, source agre
 2. Claim extraction uses Bifrost when configured and available; otherwise it falls back to a deterministic local sentence extractor.
 3. Tavily searches the web once per extracted claim when its key is configured.
 4. The app compares claim terms with returned snippets, estimates the age of the newest dated source, and shows its triage result and evidence.
-5. The answer score is the average of the per-claim scores. Each live claim score combines a heuristic snippet-overlap signal (65%) and the newest available source's age (35%). If a source has no date, the freshness signal uses a neutral default and the UI states that the date is unavailable. These are prototype heuristics, not calibrated probabilities.
+5. The answer score is the average of the per-claim scores. Each live claim score combines a heuristic snippet-overlap signal (65%) and the best source-recency signal (35%). Dated sources receive an age-based score; an undated source receives a neutral default of 45, and the highest source-recency score is used. The UI still states when a source date is unavailable. These are prototype heuristics, not calibrated probabilities.
 
 When Tavily is not configured, the app displays sample evidence, marks each claim as demo-only, and leaves the overall score blank. It never presents this mode as live search.
 
